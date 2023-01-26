@@ -6,18 +6,23 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 3001;
 
 
 app.use(express.json());
 app.use(cookieParser());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 
 app.use(cors({
   origin: [process.env.CLIENT_URL],
   methods: ["GET", "POST", "DELETE", "PATCH"],
   credentials: true,
 }));
-app.use("/main", (req, res, next) => {
+app.get("/main", (req, res, next) => {
   res.status(200).send('Hello i am work')
 });
 
