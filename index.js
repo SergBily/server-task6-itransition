@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import { router as appRoutes } from './routes/appRoutes.js'
+import { loginController } from './controllers/loginController.js';
 
 dotenv.config();
 const app = express();
@@ -11,20 +13,19 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-})
-
 app.use(cors({
   origin: [process.env.CLIENT_URL],
   methods: ["GET", "POST", "DELETE", "PATCH"],
   credentials: true,
+  optionSuccessStatus: 200
 }));
-app.get("/main", (req, res, next) => {
-  res.status(200).send('Hello i am work')
-});
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
+app.use("/", appRoutes);
 
 const start = () => {
   mongoose.set('strictQuery', false);

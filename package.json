@@ -1,7 +1,7 @@
 {
-  "name": "backend-task4",
+  "name": "backend-task6",
   "version": "0.0.1",
-  "description": "server for task4",
+  "description": "server for task6",
   "type": "module",
   "main": "index.js",
   "scripts": {
