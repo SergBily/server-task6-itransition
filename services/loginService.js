@@ -4,9 +4,10 @@ class LoginService {
   async login(name) {
     const isUser = await UserModel.findOne({ name });
     if (!isUser) {
-      await UserModel.create({ name });
+      return await UserModel.create({ name, status: true });
+    } else {
+      return await UserModel.updateOne({ name }, { $set: { status: true } });
     }
-    return await UserModel.find();
   };
 }
 

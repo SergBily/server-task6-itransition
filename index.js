@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: [process.env.CLIENT_URL],
+  origin: [process.env.CLIENT_URL, 'https://task6-itransition.vercel.app'],
   methods: ["GET", "POST", "DELETE", "PATCH"],
   credentials: true,
   optionSuccessStatus: 200
