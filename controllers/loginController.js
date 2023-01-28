@@ -4,8 +4,18 @@ class LoginController {
   async login(req, res, next) {
     try {
       const { name } = req.body;
-      const allUsers = await loginService.login(name);
-      return res.json(allUsers);
+      const user = await loginService.login(name);
+      return res.json(user);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async logout(req, res, next) {
+    try {
+      const { id} = req.body;
+      const user = await loginService.logout(id);
+      return res.json(user);
     } catch (e) {
       next(e);
     }
