@@ -41,9 +41,7 @@ app.use("/", appRoutes);
     cors: [process.env.CLIENT_URL, process.env.DEPLOY_URL],
   })
 
-  server.listen(PORT, () => {
-    console.log('i am work, port');
-  });
+  server.listen(PORT);
 
 io.use((socket, next) => {
   const { userName, sessionID, userID } = socket.handshake.auth;
@@ -64,6 +62,5 @@ io.use((socket, next) => {
 
 io.on('connection', (socket) => {
   socket.join(socket.username)
-  onConnection(io, socket)
+  onConnection(socket)
 })
-

@@ -1,23 +1,27 @@
 import MessageModel from "../models/messageModel.js";
 
 class MessageService {
-  async saveMessage(title, body, sender, recipient) {
+  async saveMessage(message) {
     return await MessageModel.create({
-      title: title ? title : 'no subject',
-      body,
+      title: message.title ? message.title : 'no subject',
+      body: message.body,
       sender: {
-        id: sender.id,
-        name: sender.name
+        id: message.sender.id,
+        name: message.sender.name
       },
       recipient: {
-        id: recipient.id,
-        name: recipient.name
+        id: message.recipient.id,
+        name: message.recipient.name
       }
     });
   };
 
   async getMessages(id) {
     return await MessageModel.find({'recipient.id': id })
+  };
+
+  async getSendedMessages(id) {
+    return await MessageModel.find({'sender.id': id })
   };
 }
 

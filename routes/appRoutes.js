@@ -8,5 +8,5 @@ import { messageController} from '../controllers/messageController.js'
 router.post('/login', loginController.login)
 router.post('/logout', loginController.logout)
 router.get('/users', usersController.getUsers)
-router.post('/message/save', messageController.saveMessage)
 router.post('/message/get', messageController.getMessages)
+router.post('/message/getSended', messageController.getSendedMessages)
