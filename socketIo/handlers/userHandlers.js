@@ -1,4 +1,4 @@
-export default function userHandlers(io, socket) {
+export default function userHandlers(socket) {
   socket.emit("session", {
     sessionID: socket.sessionID,
     userID: socket.userID,
